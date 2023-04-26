@@ -19,7 +19,7 @@ module.exports = {
 		liveReload: true,
 	},
 	resolve: {
-		extensions: ['.js', '.jsx', '.json'],
+		extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'],
 	},
 	module: {
 		rules: [
@@ -32,7 +32,7 @@ module.exports = {
 			{
 				test: /\.css$/i,
 				// use: ['style-loader', 'css-loader', 'postcss-loader'],
-				use:[
+				use: [
 					{
 						loader: 'style-loader',
 					},
@@ -40,13 +40,18 @@ module.exports = {
 						loader: 'css-loader',
 						options: {
 							importLoaders: 1,
-						}
+						},
 					},
 					{
 						loader: 'postcss-loader',
-					}
-				]
-			}
+					},
+				],
+			},
+			{
+				test: /\.tsx?$/,
+				use: 'ts-loader',
+				exclude: /node_modules/,
+			},
 		],
 	},
 	plugins: [
