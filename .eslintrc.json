@@ -1,9 +1,10 @@
 {
 	"env": {
 		"browser": true,
-		"es2021": true
+		"es2021": true,
+		"jest/globals": true
 	},
-	"extends": ["plugin:react/recommended", "airbnb", "prettier"],
+	"extends": ["plugin:react/recommended","plugin:jest/recommended" ,"airbnb", "prettier"],
 	"overrides": [],
 	"parserOptions": {
 		"ecmaVersion": "latest",
@@ -12,6 +13,18 @@
 			"jsx": true
 		}
 	},
-	"plugins": ["react"],
-	"rules": {}
+	"plugins": ["react","jest"],
+	"rules": {
+		"no-underscore-dangle":0,
+		"import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "js": "always",
+                "jsx": "always"
+            }
+        ]
+		
+	},
+	"import/no-extraneous-dependencies": ["error", {"devDependencies": false, "optionalDependencies": false, "peerDependencies": false}]
 }
