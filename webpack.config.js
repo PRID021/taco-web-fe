@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-	entry: './index.js',
+	entry: './index.jsx',
 	mode: 'development',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -30,8 +30,22 @@ module.exports = {
 			},
 
 			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader', 'postcss-loader'],
+				test: /\.css$/i,
+				// use: ['style-loader', 'css-loader', 'postcss-loader'],
+				use:[
+					{
+						loader: 'style-loader',
+					},
+					{
+						loader: 'css-loader',
+						options: {
+							importLoaders: 1,
+						}
+					},
+					{
+						loader: 'postcss-loader',
+					}
+				]
 			}
 		],
 	},
