@@ -1,9 +1,9 @@
-import React from 'react';
-
-function LayoutBody({ children }) {
+import { Outlet } from 'react-router-dom';
+import '../../app.css';
+function LayoutBody() {
 	return (
-		<div>
-			<main>{children}</main>
+		<div className='pt-20 '>
+			<Outlet />
 		</div>
 	);
 }

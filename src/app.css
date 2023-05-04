@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --tw-ripple-color: #32a1d6;
+  --tw-ripple-duration: 2000ms
+}

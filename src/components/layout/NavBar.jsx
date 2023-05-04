@@ -1,9 +1,25 @@
-import React from 'react';
-
-function NavBar({ children }) {
+import '../../app.css';
+import { Link } from 'react-router-dom';
+import LoginButton from '../login_button/LoginButton';
+import SwitchButton from '../common_button/SwitchButton';
+function NavBar() {
 	return (
-		<div>
-			<main>{children}</main>
+		<div className=" bg-primary-half h-20 flex justify-between items-center 
+		 z-10 backdrop-filter backdrop-blur-sm
+		fixed top-0 left-0 right-0 px-10 border-b-0 border-husky ">
+			<ul className="flex justify-end items-center  gap-4 content-center  h-full">
+				<li className='hover:text-highlight'>
+					<Link to="/home">Home</Link>
+				</li>
+				<li>
+					<Link className='hover:text-highlight' to="/about">About</Link>
+				</li>
+				<li>
+					<Link  className='hover:text-highlight' to="/contact">Contact</Link>
+				</li>
+			</ul>
+			<LoginButton/>
+			<SwitchButton/>
 		</div>
 	);
 }

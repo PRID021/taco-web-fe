@@ -17,6 +17,7 @@ module.exports = {
 		open: true,
 		hot: true,
 		liveReload: true,
+		historyApiFallback: true,
 	},
 	resolve: {
 		extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'],
@@ -28,10 +29,8 @@ module.exports = {
 				exclude: /node_modules/,
 				use: 'babel-loader',
 			},
-
 			{
 				test: /\.css$/i,
-				// use: ['style-loader', 'css-loader', 'postcss-loader'],
 				use: [
 					{
 						loader: 'style-loader',

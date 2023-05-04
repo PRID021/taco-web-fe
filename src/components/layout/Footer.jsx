@@ -1,11 +1,6 @@
-
 import React from 'react';
 
 function Footer({ children }) {
-    return (
-        <div>
-            <footer>{children}</footer>
-        </div>
-    );
+	return <footer>{children}</footer>;
 }
 export default Footer;
