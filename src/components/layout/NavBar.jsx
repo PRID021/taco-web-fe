@@ -1,6 +1,7 @@
 import '../../app.css';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import Logo from '../logo/Logo';
 import LoginButton from '../login_button/LoginButton';
 import SwitchButton from '../common_button/SwitchButton';
 
@@ -12,6 +13,9 @@ function NavBar() {
 		fixed top-0 left-0 right-0 px-10 border-b-0 border-husky "
 		>
 			<ul className="flex justify-end items-center  gap-4 content-center  h-full">
+				<li className="bg-blue">
+					<Logo />
+				</li>
 				<li className="hover:text-highlight">
 					<Link to="/home">Home</Link>
 				</li>

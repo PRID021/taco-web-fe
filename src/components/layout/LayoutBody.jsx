@@ -4,7 +4,7 @@ import '../../app.css';
 
 function LayoutBody() {
 	return (
-		<div className="pt-20 ">
+		<div className="pt-20 bg-black ">
 			<Outlet />
 		</div>
 	);
