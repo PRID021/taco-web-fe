@@ -1,3 +1,6 @@
-export default function subtract(firstnumber: number, secondnumber: number): number {
+export default function subtract(
+	firstnumber: number,
+	secondnumber: number
+): number {
 	return firstnumber - secondnumber;
 }
