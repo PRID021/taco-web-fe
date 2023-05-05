@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { FaCog } from 'react-icons/fa';
 
 function SwitchButton() {
 	const [isOn, setIsOn] = useState(false);
 
 	return (
-		<div className="flex items-center justify-center w-12 ">
-			<div
+		<div className="flex inline-block items-center justify-center w-12  ">
+			<button
+				type="button"
 				className={`w-12 flex absolute  h-2 `}
 				onClick={() => {
 					setIsOn(!isOn);
-					console.log(isOn, 'isOn');
+					// console.log(isOn, 'isOn');
 				}}
 			>
 				<input
@@ -27,12 +28,9 @@ function SwitchButton() {
 				 w-6 h-6 rounded-full self-center bg-green
 				 border-4 appearance-none cursor-pointer transition-all duration-2000 ease-in-out`}
 				/>
-			</div>
+			</button>
 
-			<label
-				htmlFor="toggle"
-				className="toggle-label block overflow-hidden w-12 h-3 rounded-full bg-gray-300 cursor-pointer"
-			></label>
+			<div className="toggle-label block overflow-hidden w-12 h-3 rounded-full bg-gray-300 cursor-pointer" />
 		</div>
 	);
 }
