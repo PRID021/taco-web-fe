@@ -1,9 +1,11 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../../AppContext';
 import RoundedButton from '../common_button/RoundedButton';
-const Overlay = (props) => {
-	const { showOverlay, setShowOverlay,contentOverlay, setContentOverlay } = useContext(AppContext);
+
+function Overlay(props) {
+	const { contentOverlay } = useContext(AppContext);
 	const haveContentOverlay = contentOverlay != null;
+	const { children } = props;
 	return (
 		<div className="fixed top-0 left-0 h-screen w-screen z-50 bg-opacity-50 bg-gray-900 flex justify-center items-center">
 			{!haveContentOverlay && (
@@ -13,7 +15,7 @@ const Overlay = (props) => {
 					</h2>
 
 					<form className=" text-black">
-						<div>{props.children}</div>
+						<div>{children}</div>
 						<RoundedButton />
 					</form>
 				</div>
@@ -21,13 +23,5 @@ const Overlay = (props) => {
 			{haveContentOverlay && contentOverlay}
 		</div>
 	);
-};
+}
 export default Overlay;
-
-
-				{/* <button
-							type="submit"
-							className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-						>
-							Login
-						</button> */}

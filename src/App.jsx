@@ -1,11 +1,5 @@
-import {
-	createBrowserRouter,
-	Link,
-	BrowserRouter,
-	Routes,
-	Route,
-	RouterProvider,
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import React from 'react';
 import CommonLayout from './components/layout/CommonLayout';
 import { AppProvider } from './AppContext';
 import Home from './pages/Home';
@@ -21,7 +15,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: 'home',
-				element: (<Home/>),
+				element: <Home />,
 			},
 			{
 				path: 'about',
