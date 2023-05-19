@@ -5,10 +5,10 @@ function RoundedButton({ onClick, title }) {
 	return (
 		<button
 			type="button"
-			className="flex  justify-center  h-fit relative
+			className="flex  justify-center  h-fit relative w-full
 		cursor-pointer outline-none focus:outline-none overflow-hidden
 		 transition-colors duration-300 
-		bg-secondary py-2 rounded-md  overflow-hidden outline-none"
+		bg-secondary py-3 rounded-md  overflow-hidden outline-none"
 			onClick={onClick}
 		>
 			{title}

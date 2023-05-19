@@ -7,6 +7,7 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'index_bundle.js',
+		publicPath: '/',
 	},
 	target: 'web',
 	devServer: {
@@ -25,14 +26,11 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.svg$/,
-				use: ['@svgr/webpack', 'file-loader'],
-			},
-			{
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				use: 'babel-loader',
 			},
+
 			{
 				test: /\.css$/i,
 				use: [
@@ -54,6 +52,10 @@ module.exports = {
 				test: /\.tsx?$/,
 				use: 'ts-loader',
 				exclude: /node_modules/,
+			},
+			{
+				test: /\.svg$/,
+				use: ['@svgr/webpack'],
 			},
 		],
 	},

@@ -1,4 +1,9 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+	createBrowserRouter,
+	Link,
+	Outlet,
+	RouterProvider,
+} from 'react-router-dom';
 import React from 'react';
 import CommonLayout from './components/layout/CommonLayout';
 import { AppProvider } from './AppContext';
@@ -19,7 +24,23 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'about',
-				element: <div>About</div>,
+				element: (
+					<>
+						<div>About</div>
+						<Link to="1">About</Link>
+						<Outlet />
+					</>
+				),
+				children: [
+					{
+						path: '1',
+						element: <div>About asdasdasdasd</div>,
+					},
+					{
+						path: '2',
+						element: <div>About2</div>,
+					},
+				],
 			},
 			{
 				path: 'contact',
