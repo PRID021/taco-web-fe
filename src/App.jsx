@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+	createBrowserRouter,
+	Link,
+	RouterProvider,
+} from 'react-router-dom';
 import React from 'react';
 import CommonLayout from './components/layout/CommonLayout';
 import { AppProvider } from './AppContext';
@@ -19,7 +23,20 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'about',
-				element: <div>About</div>,
+				children: [
+					{
+						index: true,
+						element: <Link to="1">About</Link>,
+					},
+					{
+						path: '1',
+						element: <div>Child 1 asdasdasdasd</div>,
+					},
+					{
+						path: '2',
+						element: <div>Child 2</div>,
+					},
+				],
 			},
 			{
 				path: 'contact',
