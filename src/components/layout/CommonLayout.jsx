@@ -9,7 +9,7 @@ import { AppContext } from '../../AppContext';
 function CommonLayout() {
 	const { showOverlay } = useContext(AppContext);
 	return (
-		<div className="h-screen w-screen relative text-white bg-gradient-to-tr from-primary to-husky">
+		<div className="h-screen w-screen  text-white bg-gradient-to-tr from-primary to-husky">
 			<NavBar />
 			<LayoutBody />
 			<Footer> This is my footer</Footer>

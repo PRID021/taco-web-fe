@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Iceland&family=Montserrat:ital,wght@0,200;0,500;0,700;1,300;1,400&display=swap');
 :root {
 	--tw-ripple-color: #32a1d6;
 	--tw-ripple-duration: 2000ms;

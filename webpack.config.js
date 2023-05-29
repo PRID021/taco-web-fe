@@ -30,6 +30,7 @@ module.exports = {
 				exclude: /node_modules/,
 				use: 'babel-loader',
 			},
+
 			{
 				test: /\.css$/i,
 				use: [
@@ -51,6 +52,10 @@ module.exports = {
 				test: /\.tsx?$/,
 				use: 'ts-loader',
 				exclude: /node_modules/,
+			},
+			{
+				test: /\.svg$/,
+				use: ['@svgr/webpack'],
 			},
 		],
 	},
