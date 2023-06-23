@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import NavBar from './NavBar';
 import LayoutBody from './LayoutBody';
 import Footer from './Footer';
-import '../../app.css';
 import Overlay from '../overlay/Overlay';
 import { AppContext } from '../../AppContext';
 

@@ -19,7 +19,7 @@ function SwitchButton() {
 					className={`toggle-checkbox ${
 						!isOn ? 'left-0' : 'left-6'
 					}  absolute  w-6 h-6 rounded-full self-center bg-white border-4 appearance-none cursor-pointer transition-all duration-2000 ease-in-out`}
-					checked={isOn}
+					defaultChecked={isOn}
 				/>
 				<FaCog
 					className={`absolute  ${

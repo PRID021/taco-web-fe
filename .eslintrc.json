@@ -22,6 +22,10 @@
 	"plugins": ["react", "jest"],
 	"rules": {
 		"react/prop-types": "off",
-		"import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+		"import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+		"react/jsx-filename-extension": [
+			2,
+			{ "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+		]
 	}
 }
