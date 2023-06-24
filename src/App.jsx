@@ -2,7 +2,7 @@ import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom';
 import React from 'react';
 import CommonLayout from './components/layout/CommonLayout';
 import { AppProvider } from './AppContext';
-import Home from './pages/Home';
+import Home from './pages/Home.tsx';
 
 const router = createBrowserRouter([
 	{

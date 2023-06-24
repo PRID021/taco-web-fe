@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 import NavBar from './NavBar';
-import LayoutBody from './LayoutBody';
 import Footer from './Footer';
+import LayoutBody from './LayoutBody';
 import Overlay from '../overlay/Overlay';
 import { AppContext } from '../../AppContext';
 
 function CommonLayout() {
 	const { showOverlay } = useContext(AppContext);
 	return (
-		<div className="h-screen w-screen  text-white bg-gradient-to-tr from-primary to-husky">
+		<div className="text-white bg-gradient-to-tr from-primary to-husky flex-col">
 			<NavBar />
 			<LayoutBody />
-			<Footer> This is my footer</Footer>
+			<Footer />
 			{showOverlay && <Overlay />}
 		</div>
 	);
