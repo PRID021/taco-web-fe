@@ -7,7 +7,7 @@ function Overlay(props) {
 	const haveContentOverlay = contentOverlay != null;
 	const { children } = props;
 	return (
-		<div className="fixed top-0 left-0 h-screen w-screen z-50 bg-opacity-50 bg-gray-900 flex justify-center items-center">
+		<div className="fixed top-0 left-0 h-screen w-screen z-50 bg-opacity-50 bg-gray-900 flex justify-center items-center  backdrop-filter backdrop-blur-sm">
 			{!haveContentOverlay && (
 				<div className="bg-white p-8 rounded-lg">
 					<h2 className="text-lg text-black font-semibold mb-4">

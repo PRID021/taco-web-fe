@@ -1,43 +1,51 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import React, { useState } from 'react';
 import LoginButton from '../login_button/LoginButton';
 import SwitchButton from '../common_button/SwitchButton';
 import useWindowListener from '../../hooks/useWindowListener';
+import '../../app.css';
 
-const small =
-	'bg-primary-half h-10 flex  items-center z-10 backdrop-filter backdrop-blur-sm sticky  top-0 left-0 right-0 px-10 border-b-0 border-husky duration-500';
-const big =
-	'bg-primary-half h-20 flex justify-between items-center z-10 backdrop-filter backdrop-blur-sm sticky  top-0 left-0 right-0 px-10 border-b-0 border-husky duration-500';
+const navItems = [
+	{ name: 'Home', path: '/home' },
+	{ name: 'About', path: '/about' },
+	{ name: 'Contact', path: '/contact' },
+];
 
 function NavBar() {
-	const [navStyle, setNavStyle] = useState(big);
+	const [isSmall, setNavStyle] = useState(false);
 	useWindowListener('scroll', () => {
 		if (window.scrollY === 0) {
-			setNavStyle(big);
+			setNavStyle(false);
 		} else {
-			setNavStyle(small);
+			setNavStyle(true);
 		}
 	});
 
-	const showButton = navStyle === big;
 	return (
-		<div className={navStyle}>
+		<div
+			className={
+				isSmall
+					? 'bg-primary-half h-10 flex  items-center z-10 backdrop-filter backdrop-blur-sm sticky  top-0 left-0 right-0 px-10 border-b-0 border-husky duration-500'
+					: 'bg-primary-half h-20 flex justify-between items-center z-10 backdrop-filter backdrop-blur-sm sticky  top-0 left-0 right-0 px-10 border-b-0 border-husky duration-500'
+			}
+		>
 			<ul className="flex  gap-4 ">
-				<li className="hover:text-highlight">
-					<Link to="/home">Home</Link>
-				</li>
-				<li>
-					<Link className="hover:text-highlight" to="/about">
-						About
-					</Link>
-				</li>
-				<li>
-					<Link className="hover:text-highlight" to="/contact">
-						Contact
-					</Link>
-				</li>
+				{navItems.map((item) => (
+					<NavLink
+						key={item.name}
+						className={({ isActive }) => {
+							if (isActive) {
+								return 'text-highlight underline  underline-offset-4';
+							}
+							return 'hover:text-highlight';
+						}}
+						to={item.path}
+					>
+						{item.name}
+					</NavLink>
+				))}
 			</ul>
-			{showButton && (
+			{!isSmall && (
 				<div className="flex flex-row-reverse gap-4 ">
 					<LoginButton />
 					<SwitchButton />

@@ -4,7 +4,10 @@ function IngredientsApi() {
 	const endpoint = '/ingredients';
 	const [axiosInstance, config] = BaseApi();
 	return {
-		getAll: () => axiosInstance.get(`${config.baseURL}${endpoint}`),
+		getAll: () =>
+			axiosInstance.get(`${config.baseURL}${endpoint}`, {
+				headers: config.headers,
+			}),
 	};
 }
 

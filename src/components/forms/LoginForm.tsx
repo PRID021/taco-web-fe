@@ -1,25 +1,46 @@
-import React, { useState, useContext, useRef } from 'react';
+import  * as React from 'react';
 import '../../app.css';
 import RoundedButton from '../common_button/RoundedButton';
 import { AppContext } from '../../AppContext';
+import validator from 'validator';
+import Loading from '../loading/loading';
+
+interface FormState{
+	value: string,
+	error: string,
+}
 
 function LoginForm() {
 	document.body.style.overflow = 'hidden';
-	const { setShowOverlay, setContentOverlay } = useContext(AppContext);
-	const childRef = useRef(null);
-	const [userName, setUserName] = useState('');
-	const [userPassword, setUserPassword] = useState('');
-	const handleCloseForm = (iUserName, iPassword) => {
-		// const user = { iUserName, iPassword };
+	const { setShowOverlay, setContentOverlay } = React.useContext(AppContext);
+	const childRef = React.useRef(null);
+	const [showError, setShowError] = React.useState(false);
+	const [userName, setUserName] = React.useState<FormState>({value: '', error: null});
+	const [userPassword, setUserPassword] = React.useState({	value: '', error: null});
+	const handleSubmitForm = () => {
+		let nameError = null;
+		let passwordError = null;
+		if (validator.isEmpty(userName.value)) {
+			nameError = 'Username cannot be empty';
+		}
+		if(validator.isEmpty(userPassword.value)){
+			passwordError = 'Password cannot be empty';
+		}
+		if(nameError || passwordError){
+			setUserName({...userName, error: nameError});
+			setUserPassword({...userPassword, error: passwordError});
+			setShowError(true);
+			return;
+		}
 		const id = setInterval(() => {
 			clearInterval(id);
 		}, 1000);
 		document.body.style.overflow = '';
-		setContentOverlay(null);
-		setShowOverlay(false);
+		setContentOverlay(<Loading/>);
+		// setShowOverlay(false);
 	};
 
-	const handleClick = (event) => {
+	const handleClick = (event:any) => {
 		if (childRef.current && !childRef.current.contains(event.target)) {
 			document.body.style.overflow = '';
 			setShowOverlay(false);
@@ -27,8 +48,8 @@ function LoginForm() {
 	};
 	return (
 		<div
-			onClick={handleClick}
 			onKeyUp={handleClick}
+			onClick={handleClick}
 			role="button"
 			tabIndex={0}
 			className="p-32 w-screen h-screen flex justify-center items-center"
@@ -47,21 +68,23 @@ function LoginForm() {
 						id="userField"
 						type="text"
 						placeholder="Enter your username"
-						value={userName}
-						onChange={(e) => setUserName(e.target.value)}
+						value={userName.value}
+						onChange={(e) => setUserName({...userName, value: e.target.value})}
 						className="w-full  mt-2 px-4 py-2 text-gray-700 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400 focus:border-blue-400"
 					/>
+					{showError&&<p className='text-red-700 text-sm' >{userName.error}</p>}
 				</label>
 				<label htmlFor="userPassword">
-					Username
+					Password
 					<input
 						id="userPassword"
 						type="password"
 						placeholder="Enter your password"
-						value={userPassword}
-						onChange={(e) => setUserPassword(e.target.value)}
+						value={userPassword.value}
+						onChange={(e) => setUserPassword({...userPassword,value: e.target.value})}
 						className="w-full mt-2 px-4 py-2 text-gray-700  border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400 focus:border-blue-400"
 					/>
+					{showError&&<p className='text-red-700 text-sm'>{userPassword.error}</p>}
 				</label>
 				<a href="#top" className="hover:text-sky-700 self-end text-sm">
 					{' '}
@@ -70,7 +93,7 @@ function LoginForm() {
 				<RoundedButton
 					title="Submit"
 					onClick={() => {
-						handleCloseForm(userName, userPassword);
+						handleSubmitForm();
 					}}
 				/>
 
