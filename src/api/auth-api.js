@@ -6,7 +6,7 @@ function AuthApi() {
 	const [axiosInstance, axiosConfig] = BaseApi();
 
 	return {
-		login: (userName, password) =>
+		login: async (userName, password) =>
 			axiosInstance
 				.post(`${endpoint}/login`, { userName, password })
 				.then((response) => {
@@ -16,7 +16,7 @@ function AuthApi() {
 				}),
 		logout: () => localStorage.removeItem('user'),
 
-		register: (userName, email, password) =>
+		register: async (userName, email, password) =>
 			axiosInstance.post(`${endpoint}/register`, { userName, email, password }),
 		getCurrentUser: () => JSON.parse(localStorage.getItem('user')),
 	};

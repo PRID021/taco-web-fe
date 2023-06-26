@@ -4,6 +4,8 @@ import validator from 'validator';
 import RoundedButton from '../common_button/RoundedButton';
 import { AppContext } from '../../AppContext';
 import Loading from '../loading/loading';
+import AuthApi from "../../api/auth-api";
+
 
 interface FormState {
 	value: string;
@@ -11,7 +13,7 @@ interface FormState {
 }
 
 function LoginForm() {
-	document.body.style.overflow = 'hidden';
+	// document.body.style.overflow = 'hidden';
 	const { setShowOverlay, setContentOverlay } = React.useContext(AppContext);
 	const childRef = React.useRef(null);
 	const [showError, setShowError] = React.useState(false);
@@ -38,17 +40,38 @@ function LoginForm() {
 			setShowError(true);
 			return;
 		}
-		const id = setInterval(() => {
-			clearInterval(id);
-		}, 1000);
-		document.body.style.overflow = '';
+		// const id = setInterval(() => {
+		// 	clearInterval(id);
+		// }, 1000);
 		setContentOverlay(<Loading />);
-		// setShowOverlay(false);
+
+
+		async function login(){
+			// const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+			// 	method: 'POST',
+			// 	body: JSON.stringify({
+			// 		title: 'foo',
+			// 		body: 'bar',
+			// 		userId: 1,
+			// 	}),
+			// 	headers: {
+			// 		'Content-type': 'application/json; charset=UTF-8',
+			// 	},
+			// });
+
+			
+			const json = await AuthApi().login(userName.value, userPassword.value);
+			console.log(json);
+			// document.body.style.overflow = '';
+			setContentOverlay(null);
+			setShowOverlay(false);
+		}
+		login();
 	};
 
 	const handleClick = (event: any) => {
 		if (childRef.current && !childRef.current.contains(event.target)) {
-			document.body.style.overflow = '';
+			// document.body.style.overflow = '';
 			setShowOverlay(false);
 		}
 	};
@@ -58,7 +81,7 @@ function LoginForm() {
 			onClick={handleClick}
 			role="button"
 			tabIndex={0}
-			className="p-32 w-screen h-screen flex justify-center items-center"
+			className="p-32  w-screen h-screen flex justify-center items-center"
 		>
 			<div
 				ref={childRef}
