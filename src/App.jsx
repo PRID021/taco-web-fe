@@ -3,6 +3,7 @@ import React from 'react';
 import CommonLayout from './components/layout/CommonLayout';
 import { AppProvider } from './AppContext';
 import Home from './pages/Home.tsx';
+import Auth from './pages/Auth';
 
 const router = createBrowserRouter([
 	{
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
 			{
 				path: 'contact',
 				element: <div>Contact</div>,
+			},
+			{
+				path: 'login/oauth2',
+				element: <Auth />,
 			},
 		],
 	},

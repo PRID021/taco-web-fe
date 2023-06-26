@@ -3,7 +3,7 @@ import BaseApi from './api-config';
 function AuthApi() {
 	const endpoint = '/auth';
 	// eslint-disable-next-line no-unused-vars
-	const [axiosInstance, axiosConfig] = BaseApi();
+	const [axiosInstance] = BaseApi();
 
 	return {
 		login: async (userName, password) =>

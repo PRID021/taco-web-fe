@@ -13,8 +13,13 @@ interface Ingredients {
 function Home() {
 	React.useEffect(() => {
 		async function fetchAccounts() {
-			const response = await IngredientsApi.default().getAll();
-			setIngredients(response.data);
+			try {
+				const responseData = await IngredientsApi.default().getAll();
+				setIngredients(responseData);
+			} catch (error) {
+				console.log(`abc ${error}`);
+			}
+
 		}
 		fetchAccounts();
 	}, []);
