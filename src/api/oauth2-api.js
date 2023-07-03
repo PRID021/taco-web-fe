@@ -1,61 +1,66 @@
-
 import axios from 'axios';
-
 
 const clientId = 'taco-admin-client';
 const clientSecret = 'secret';
-const tokenEndpoint = 'http://localhost:9000';
-
-const axiosConfig = {
-    baseURL: tokenEndpoint,
-    timeout: 10000,
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Basic ${btoa(`${clientId}:${clientSecret}`)}`
-    },
-
-};
-
+const authEndpoint = 'http://localhost:9000';
+const resourceEndpoint = 'http://localhost:4443/api';
 
 function OAuth2Api() {
-    const baseAxios = axios;
-    const axiosInstance = baseAxios.create(axiosConfig);
-    if (axiosInstance) {
-        axiosInstance.interceptors.request.use(
-            (config) => config,
-            (error) => Promise.reject(error)
-        );
-        axiosInstance.interceptors.response.use(
-            (response) => response,
-            error => {
-                return Promise.reject(error)
-            }
-        );
-    }
+	const authAxios = axios.create({
+		baseURL: authEndpoint,
+		timeout: 10000,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
+		},
+	});
 
-    return {
-        exchangeCode: async (code) => {
-            const data = new URLSearchParams();
-            data.append('grant_type', 'authorization_code');
-            data.append('redirect_uri', 'http://localhost:5000/login/oauth2');
-            data.append('code', code);
+	const resourceAxios = axios.create({
+		baseURL: resourceEndpoint,
+		timeout: 10000,
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${
+				JSON.parse(localStorage.getItem('user_token')).access_token
+			}`,
+		},
+	});
 
-            return axiosInstance
-                .post('/oauth2/token', data)
-                .then((response) => {
-                    if (response.data) {
-                        localStorage.setItem('user', JSON.stringify(response.data));
-                        console.log('LocalStorage :', localStorage.getItem('user'));
-                    }
-                })
-                .catch(error => {
-                    console.error('Token request failed:', error);
-                    // Handle the error
-                })
+	return {
+		exchangeCode: async (code) => {
+			const data = new URLSearchParams();
+			data.append('grant_type', 'authorization_code');
+			data.append('redirect_uri', 'http://localhost:5000/login/oauth2');
+			data.append('code', code);
 
-                ;
-        },
-    }
+			return authAxios
+				.post('/oauth2/token', data)
+				.then((response) => {
+					if (response.data) {
+						localStorage.setItem('user_token', JSON.stringify(response.data));
+						// console.log('LocalStorage :', localStorage.getItem('user_token'));
+						return true;
+					}
+					return false;
+				})
+				.catch((error) => 
+					// console.error('Token request failed:', error);
+					 false
+				);
+		},
+
+		getUserInfo: async () => resourceAxios
+				.get('/users')
+				.then((response) => {
+					if (response.data) {
+						return response.data;
+					}
+					return null;
+				})
+				.catch((error) => {
+					// console.error('Get user detail failed:', error);
+				}),
+	};
 }
 
 export default OAuth2Api;

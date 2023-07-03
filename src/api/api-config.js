@@ -19,12 +19,13 @@ function BaseApi() {
 		);
 		axiosInstance.interceptors.response.use(
 			(response) => response,
-			error => {
-				console.log(error);
+			(error) => {
+				// console.log(error);
 				if (error.response.status === 401) {
-					window.location.href = "http://localhost:9000/oauth2/authorize?client_id=taco-admin-client&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Flogin%2Foauth2&scope=writeIngredients%20deleteIngredients%20openid&response_type=code&response_mode=form_post";
+					window.location.href =
+						'http://localhost:9000/oauth2/authorize?client_id=taco-admin-client&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Flogin%2Foauth2&scope=writeIngredients%20deleteIngredients%20openid&response_type=code&response_mode=form_post';
 				}
-				return Promise.reject(error)
+				return Promise.reject(error);
 			}
 		);
 	}

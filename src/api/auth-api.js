@@ -6,14 +6,6 @@ function AuthApi() {
 	const [axiosInstance] = BaseApi();
 
 	return {
-		login: async (userName, password) =>
-			axiosInstance
-				.post(`${endpoint}/login`, { userName, password })
-				.then((response) => {
-					if (response.data.accessToken) {
-						localStorage.setItem('user', JSON.stringify(response.data));
-					}
-				}),
 		logout: () => localStorage.removeItem('user'),
 
 		register: async (userName, email, password) =>

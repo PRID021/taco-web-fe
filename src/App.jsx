@@ -8,11 +8,7 @@ import Auth from './pages/Auth';
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: (
-			<AppProvider>
-				<CommonLayout />
-			</AppProvider>
-		),
+		element: <CommonLayout />,
 		children: [
 			{
 				path: 'home',
@@ -48,7 +44,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-	return <RouterProvider router={router} />;
+	return (
+		<AppProvider>
+			<RouterProvider router={router} />;
+		</AppProvider>
+	);
 }
 
 export default App;

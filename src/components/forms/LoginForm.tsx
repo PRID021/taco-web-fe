@@ -3,8 +3,8 @@ import '../../app.css';
 import validator from 'validator';
 import RoundedButton from '../common_button/RoundedButton';
 import { AppContext } from '../../AppContext';
-import Loading from '../loading/loading';
-import AuthApi from "../../api/auth-api";
+// import Loading from '../loading/loading';
+// import AuthApi from "../../api/auth-api";
 
 
 interface FormState {
@@ -43,7 +43,7 @@ function LoginForm() {
 		// const id = setInterval(() => {
 		// 	clearInterval(id);
 		// }, 1000);
-		setContentOverlay(<Loading />);
+		// setContentOverlay(<Loading />);
 
 
 		async function login(){
@@ -60,8 +60,8 @@ function LoginForm() {
 			// });
 
 			
-			const json = await AuthApi().login(userName.value, userPassword.value);
-			console.log(json);
+			// const json = await AuthApi().login(userName.value, userPassword.value);
+			// console.log(json);
 			// document.body.style.overflow = '';
 			setContentOverlay(null);
 			setShowOverlay(false);

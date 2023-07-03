@@ -1,5 +1,8 @@
 module.exports = {
-	content: ['./src/**/*.{html,js,jsx,tsx}', './public/index.html'],
+	content: [
+		'./src/**/*.{html,js,jsx,tsx}',
+		'./public/index.html',
+	],
 	mode: 'jit',
 	darkMode: 'class',
 
@@ -9,10 +12,6 @@ module.exports = {
 			h2: ['Iceland', 'cursive'],
 		},
 		extend: {
-			backgroundImage: {
-				'signIn': `url("./assets/signIn.jpg")`,
-				'test': `url("./assets/test.jpg")`,
-			},
 			spacing: {
 				'8xl': '96rem',
 				'9xl': '128rem',

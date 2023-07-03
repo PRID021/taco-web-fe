@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import React, { useState } from 'react';
 import LoginButton from '../login_button/LoginButton';
-import SwitchButton from '../common_button/SwitchButton';
+// import SwitchButton from '../common_button/SwitchButton';
 import useWindowListener from '../../hooks/useWindowListener';
 import '../../app.css';
 
@@ -48,7 +48,7 @@ function NavBar() {
 			{!isSmall && (
 				<div className="flex flex-row-reverse gap-4 ">
 					<LoginButton />
-					<SwitchButton />
+					{/* <SwitchButton /> */}
 				</div>
 			)}
 		</div>
