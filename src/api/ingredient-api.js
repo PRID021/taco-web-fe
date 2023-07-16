@@ -1,13 +1,25 @@
-import BaseApi from './api-config';
+import axios from 'axios';
 
 function IngredientsApi() {
-	const endpoint = '/ingredients';
-	const [axiosInstance, config] = BaseApi();
+	const ingredientsApi = axios.create({
+		baseURL: 'http://localhost:4443/api/ingredients',
+		timeout: 10000,
+		headers: {
+			Authorization: `Bearer ${
+				JSON.parse(localStorage.getItem('user_token')).access_token
+			}`,
+		},
+	});
+
 	return {
-		getAll: async (callBack) =>
-			axiosInstance.get(`${config.baseURL}${endpoint}`, {
-				headers: config.headers,
-			})
+		getAllIngredients: async () =>
+			ingredientsApi.get().then((response) => {
+				if (response) {
+					// console.log('Ingredients :', response);
+					return response.data;
+				}
+				return null;
+			}),
 	};
 }
 

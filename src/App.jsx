@@ -2,7 +2,7 @@ import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom';
 import React from 'react';
 import CommonLayout from './components/layout/CommonLayout';
 import { AppProvider } from './AppContext';
-import Home from './pages/Home.tsx';
+import Home from './pages/Home';
 import Auth from './pages/Auth';
 
 const router = createBrowserRouter([
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
 function App() {
 	return (
 		<AppProvider>
-			<RouterProvider router={router} />;
+			<RouterProvider router={router} />
 		</AppProvider>
 	);
 }

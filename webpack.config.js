@@ -32,9 +32,6 @@ module.exports = {
 					{
 						loader: 'babel-loader',
 					},
-					{
-						loader: 'ts-loader',
-					},
 				],
 			},
 
@@ -55,6 +52,13 @@ module.exports = {
 					},
 				],
 			},
+
+			{
+				test: /\.ts?$/,
+				loader: 'ts-loader',
+				exclude: /node_modules/,
+			},
+
 			{
 				test: /\.tsx?$/,
 				use: 'ts-loader',

@@ -6,26 +6,6 @@ const authEndpoint = 'http://localhost:9000';
 const resourceEndpoint = 'http://localhost:4443/api';
 
 function OAuth2Api() {
-	const authAxios = axios.create({
-		baseURL: authEndpoint,
-		timeout: 10000,
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
-		},
-	});
-
-	const resourceAxios = axios.create({
-		baseURL: resourceEndpoint,
-		timeout: 10000,
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${
-				JSON.parse(localStorage.getItem('user_token')).access_token
-			}`,
-		},
-	});
-
 	return {
 		exchangeCode: async (code) => {
 			const data = new URLSearchParams();
@@ -33,7 +13,15 @@ function OAuth2Api() {
 			data.append('redirect_uri', 'http://localhost:5000/login/oauth2');
 			data.append('code', code);
 
-			return authAxios
+			return axios
+				.create({
+					baseURL: authEndpoint,
+					timeout: 10000,
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+						Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
+					},
+				})
 				.post('/oauth2/token', data)
 				.then((response) => {
 					if (response.data) {
@@ -43,13 +31,25 @@ function OAuth2Api() {
 					}
 					return false;
 				})
-				.catch((error) => 
-					// console.error('Token request failed:', error);
-					 false
+				.catch(
+					(error) =>
+						// console.error('Token request failed:', error);
+						false
 				);
 		},
 
-		getUserInfo: async () => resourceAxios
+		getUserInfo: async () =>
+			axios
+				.create({
+					baseURL: resourceEndpoint,
+					timeout: 10000,
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${
+							JSON.parse(localStorage.getItem('user_token')).access_token
+						}`,
+					},
+				})
 				.get('/users')
 				.then((response) => {
 					if (response.data) {
